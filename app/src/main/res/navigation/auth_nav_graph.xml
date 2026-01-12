@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment"
+    android:id="@+id/auth_nav_graph">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.quizapp.ui.auth.LoginFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/action_loginFragment_to_completeProfileFragment"
+            app:destination="@id/completeProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.quizapp.ui.auth.RegisterFragment"
+        android:label="Register" />
+
+    <fragment
+        android:id="@+id/completeProfileFragment"
+        android:name="com.example.quizapp.ui.auth.CompleteProfileFragment"
+        android:label="Complete Profile"
+        tools:layout="@layout/fragment_complete_profile" />
+
+</navigation>

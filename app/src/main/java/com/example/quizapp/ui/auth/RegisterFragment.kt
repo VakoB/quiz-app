@@ -12,9 +12,18 @@ class RegisterFragment : Fragment() {
     private var _binding: AuthFragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = AuthFragmentRegisterBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = AuthFragmentRegisterBinding.bind(view)
+
     }
 
     override fun onDestroyView() {

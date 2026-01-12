@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.quizapp.data.auth.AuthRepository
+import com.example.quizapp.data.auth.UserRepository
+import com.example.quizapp.data.models.User
+import com.google.firebase.auth.FirebaseUser
 
 class AuthViewModel(
-    private val repository: AuthRepository = AuthRepository()
+    private val authRepository: AuthRepository = AuthRepository(),
+    private val userRepository: UserRepository = UserRepository()
 ) : ViewModel() {
 
     private val _authState = MutableLiveData<AuthState>(AuthState.Idle)
@@ -14,7 +18,7 @@ class AuthViewModel(
 
     fun login(email: String, password: String) {
         _authState.value = AuthState.Loading
-        repository.loginWithEmail(email, password) {
+        authRepository.loginWithEmail(email, password) {
             _authState.value = it.fold(
                 onSuccess = { AuthState.Success },
                 onFailure = { e -> AuthState.Error(e.message ?: "Login failed") }
@@ -24,7 +28,7 @@ class AuthViewModel(
 
     fun register(email: String, password: String) {
         _authState.value = AuthState.Loading
-        repository.registerWithEmail(email, password) {
+        authRepository.registerWithEmail(email, password) {
             _authState.value = it.fold(
                 onSuccess = { AuthState.Success },
                 onFailure = { e -> AuthState.Error(e.message ?: "Registration failed") }
@@ -34,11 +38,52 @@ class AuthViewModel(
 
     fun loginWithGoogle(idToken: String) {
         _authState.value = AuthState.Loading
-        repository.loginWithGoogle(idToken) {
-            _authState.value = it.fold(
-                onSuccess = { AuthState.Success },
+        authRepository.loginWithGoogle(idToken) { result ->
+            result.fold(
+                onSuccess = { firebaseUser ->
+                    userRepository.userExists(firebaseUser.uid) { exists ->
+                        _authState.value = if (exists) {
+                            AuthState.Authenticated
+                        } else {
+                            AuthState.NeedsProfile
+                        }
+                    }
+                },
                 onFailure = { e -> AuthState.Error(e.message ?: "Google sign-in failed") }
             )
+        }
+    }
+
+    private fun checkUserProfile(user: FirebaseUser) {
+        userRepository.userExists(user.uid) { exists ->
+            _authState.value = if (exists) AuthState.Authenticated
+            else AuthState.NeedsProfile
+        }
+    }
+
+    fun completeProfile(
+        firstName: String,
+        lastName: String,
+        imageUrl: String = ""
+    ) {
+        val firebaseUser = authRepository.getCurrentUser() ?: run {
+            _authState.value = AuthState.Error("User not logged in")
+            return
+        }
+
+        val user = User(
+            uid = firebaseUser.uid,
+            firstName = firstName,
+            lastName = lastName,
+            email = firebaseUser.email ?: "",
+            imageUrl = imageUrl,
+            provider = firebaseUser.providerData.firstOrNull()?.providerId ?: "google",
+            completedProfile = true
+        )
+
+        userRepository.createUser(user) { success ->
+            _authState.value = if (success) AuthState.Authenticated
+            else AuthState.Error("Failed to save profile")
         }
     }
 }

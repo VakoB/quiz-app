@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_nav_graph"
+    app:startDestination="@id/auth_nav_graph">
+
+    <include
+        android:id="@+id/auth_nav_graph"
+        app:graph="@navigation/auth_nav_graph" />
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.quizapp.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_joinGroupFragment"
+            app:destination="@id/joinGroupFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_groupDetailsFragment"
+            app:destination="@id/groupDetailsFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/createGroupFragment"
+        android:name="com.example.quizapp.ui.groups.CreateGroupFragment"
+        tools:layout="@layout/fragment_join_group" >
+        <action
+            android:id="@+id/action_createGroupFragment_to_groupDetailsFragment"
+            app:destination="@id/groupDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/joinGroupFragment"
+        android:name="com.example.quizapp.ui.groups.JoinGroupFragment"
+        tools:layout="@layout/fragment_create_group" >
+        <action
+            android:id="@+id/action_joinGroupFragment_to_groupDetailsFragment"
+            app:destination="@id/groupDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/groupDetailsFragment"
+        android:name="com.example.quizapp.ui.groups.GroupDetailsFragment"
+        android:label="fragment_group_details"
+        tools:layout="@layout/fragment_group_details" >
+        <argument
+            android:name="groupId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+
+
+</navigation>
+
+

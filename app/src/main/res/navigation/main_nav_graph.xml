@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.quizapp.ui.main.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.quizapp.ui.main.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/groupsFragment"
+        android:name="com.example.quizapp.ui.main.GroupsFragment"
+        android:label="GroupsFragment"
+        tools:layout="@layout/fragment_groups"/>
+
+    <dialog
+        android:id="@+id/addGroupBottomSheet"
+        android:name="com.example.quizapp.ui.groups.AddGroupBottomSheet"
+        android:label="AddGroupBottomSheet"
+        tools:layout="@layout/bottom_sheet_add_group"/>
+
+
+</navigation>

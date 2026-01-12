@@ -38,4 +38,12 @@ class AuthRepository(
             .addOnSuccessListener { callback(Result.success(it.user!!)) }
             .addOnFailureListener { callback(Result.failure(it)) }
     }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
+    }
+
+    fun signOut() {
+        auth.signOut()
+    }
 }

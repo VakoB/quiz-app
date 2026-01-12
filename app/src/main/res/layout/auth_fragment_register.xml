@@ -239,107 +239,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cbTerms" />
 
-        <!-- OR Divider -->
         <LinearLayout
-            android:id="@+id/dividerLayout"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnRegister">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#8B7FBF" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:text="OR"
-                android:textColor="#B8B3C8"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#8B7FBF" />
-        </LinearLayout>
-
-        <!-- Social Login Buttons -->
-        <LinearLayout
-            android:id="@+id/socialButtons"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dividerLayout">
-
-            <!-- Google Sign Up -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGoogleSignUp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                android:text="Google"
-                android:textAllCaps="false"
-                android:textColor="#2D1B69"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_google"
-                app:iconGravity="textStart"
-                app:iconPadding="4dp"
-                app:strokeColor="#FFFFFF"
-                app:strokeWidth="0dp" />
-
-            <!-- Facebook Sign Up -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnFacebookSignUp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                android:text="Facebook"
-                android:textAllCaps="false"
-                android:textColor="#2D1B69"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_facebook"
-                app:iconGravity="textStart"
-                app:iconPadding="4dp"
-                app:strokeColor="#FFFFFF"
-                app:strokeWidth="0dp" />
-        </LinearLayout>
-
-        <!-- Login Text -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/socialButtons">
 
             <TextView
                 android:layout_width="wrap_content"
