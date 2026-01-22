@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.game.InputQuestionsBottomSheet"
+    android:paddingVertical="20dp">
+
+    <EditText
+        android:id="@+id/bottomSheetQuestionEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:hint="Question"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/bottomSheetOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetQuestionEt"
+        android:layout_marginTop="20dp"
+        android:hint="Option 1"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/bottomSheetOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetOption1"
+        android:layout_marginTop="20dp"
+        android:hint="Option 2"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/bottomSheetOption3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetOption2"
+        android:layout_marginTop="20dp"
+        android:hint="Option 3"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/bottomSheetOption4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetOption3"
+        android:layout_marginTop="20dp"
+        android:hint="Option 4"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/bottomSheetSubmitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetOption4"
+        android:layout_marginVertical="40dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

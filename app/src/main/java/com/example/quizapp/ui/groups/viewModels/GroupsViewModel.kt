@@ -8,6 +8,8 @@ import com.example.quizapp.data.groups.GroupsRepository
 import com.example.quizapp.data.models.Group
 import com.example.quizapp.data.models.GroupMember
 import com.example.quizapp.ui.groups.GroupListItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ValueEventListener
 
 
 class GroupsViewModel(
@@ -22,11 +24,31 @@ class GroupsViewModel(
     private val _navigateToGroupDetails = MutableLiveData<String?>()
     val navigateToGroupDetails: LiveData<String?> = _navigateToGroupDetails
 
+    private val _isOwner = MutableLiveData<Boolean>()
+    val isOwner: LiveData<Boolean> = _isOwner
+
     private val _group = MutableLiveData<Group?>()
     val group: LiveData<Group?> = _group
 
     private val _members = MutableLiveData<List<GroupMember>>()
     val members: LiveData<List<GroupMember>> = _members
+
+    private val _isGameActive = MutableLiveData<Boolean>()
+    val isGameActive: LiveData<Boolean> = _isGameActive
+
+    private var gameExistsListener: ValueEventListener? = null
+
+
+
+    fun listenGameExists(groupId: String) {
+        gameExistsListener?.let {
+            repository.removeGameExistsListener(groupId, it)
+        }
+
+        gameExistsListener = repository.listenGameExists(groupId) { exists ->
+            _isGameActive.postValue(exists)
+        }
+    }
 
     fun loadGroups() {
         _loading.value = true
@@ -71,6 +93,9 @@ class GroupsViewModel(
         repository.getGroup(groupId) { grp ->
             if (grp != null) {
                 _group.postValue(grp)
+
+                val currentUid = FirebaseAuth.getInstance().currentUser?.uid
+                _isOwner.postValue(grp.ownerId == currentUid)
 
                 repository.getGroupMembers(groupId) { memList ->
                     _members.postValue(memList)
@@ -131,9 +156,8 @@ class GroupsViewModel(
         _error.value = null
     }
 
-
-
     fun onNavigationHandled() {
         _navigateToGroupDetails.value = null
     }
+
 }

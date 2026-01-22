@@ -4,6 +4,10 @@ import com.example.quizapp.data.auth.UserRepository
 import com.example.quizapp.data.models.Group
 import com.example.quizapp.data.models.GroupMember
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,6 +20,34 @@ class GroupsRepository(
 ) {
 
     private val groupsRef = firestore.collection("groups")
+    private val rtdb: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+    fun removeGameExistsListener(groupId: String, listener: ValueEventListener) {
+        rtdb.reference
+            .child("games")
+            .child(groupId)
+            .removeEventListener(listener)
+    }
+
+    fun listenGameExists(
+        groupId: String,
+        callback: (Boolean) -> Unit
+    ): ValueEventListener {
+        val ref = rtdb.reference.child("games").child(groupId)
+
+        val listener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                callback(snapshot.exists())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        }
+
+        ref.addValueEventListener(listener)
+        return listener
+    }
 
     fun getOwnedGroups(callback: (List<Group>) -> Unit) {
         val uid = auth.currentUser?.uid ?: return

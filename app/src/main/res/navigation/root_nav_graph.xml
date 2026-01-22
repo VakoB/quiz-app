@@ -53,6 +53,62 @@
             android:name="groupId"
             app:argType="string"
             android:defaultValue='""' />
+        <action
+            android:id="@+id/action_groupDetailsFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+        <action
+            android:id="@+id/action_groupDetailsFragment_to_gameLobbyFragment"
+            app:destination="@id/gameLobbyFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="com.example.quizapp.ui.game.QuestionsFragment"
+        android:label="fragment_questions"
+        tools:layout="@layout/fragment_questions" >
+        <argument
+            android:name="groupId"
+            app:argType="string"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_questionsFragment_to_gameLobbyFragment"
+            app:destination="@id/gameLobbyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameLobbyFragment"
+        android:name="com.example.quizapp.ui.game.GameLobbyFragment"
+        android:label="fragment_game_lobby"
+        tools:layout="@layout/fragment_game_lobby" >
+        <argument
+            android:name="groupId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_gameLobbyFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.quizapp.ui.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <argument
+            android:name="groupId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_gameFragment_to_leaderBoardFragment"
+            app:destination="@id/leaderBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaderBoardFragment"
+        android:name="com.example.quizapp.ui.game.LeaderBoardFragment"
+        android:label="fragment_leader_board"
+        tools:layout="@layout/fragment_leader_board" >
+        <argument
+            android:name="groupId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_leaderBoardFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 

@@ -25,4 +25,15 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="24dp"/>
 
+    <TextView
+        android:id="@+id/membersScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/memberRoleTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/memberRoleTv"
+        android:layout_marginEnd="20dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
