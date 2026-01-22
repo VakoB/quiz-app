@@ -11,8 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Group Name"
+        tools:text="Group Name"
         android:textSize="48sp"
+        android:textColor="#110b32"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,9 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Members:"
-        android:textSize="32dp"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupDetailsCodeTv" />
+        app:layout_constraintTop_toBottomOf="@+id/groupDetailsCodeTv"
+        android:textColor="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupMembersRv"
@@ -54,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/groupDetailsMembersTitleTv"
         android:layout_marginTop="10dp"/>
 
-    <Button
+    <TextView
         android:id="@+id/groupDetailsCreateGameButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,9 +64,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="40dp"
-        android:visibility="gone"/>
+        android:background="@drawable/bg_button"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:padding="16dp"
+        android:visibility="gone"
+        />
 
-    <Button
+    <TextView
         android:id="@+id/groupDetailsJoinGameButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,6 +80,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="40dp"
-        android:visibility="gone"/>
+        android:background="@drawable/bg_button"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:padding="16dp"
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

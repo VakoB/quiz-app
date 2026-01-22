@@ -10,4 +10,5 @@ sealed class AuthState {
 
     object Authenticated : AuthState()
     object NeedsProfile : AuthState()
+    object Unauthenticated : AuthState()
 }

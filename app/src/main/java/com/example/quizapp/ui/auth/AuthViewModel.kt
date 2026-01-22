@@ -16,6 +16,22 @@ class AuthViewModel(
     private val _authState = MutableLiveData<AuthState>(AuthState.Idle)
     val authState: LiveData<AuthState> = _authState
 
+    init {
+        val user = authRepository.getCurrentUser()
+
+        if (user != null) {
+            userRepository.getUser(user.uid) { userDoc ->
+                _authState.value = if (userDoc != null) {
+                    AuthState.Authenticated
+                } else {
+                    AuthState.NeedsProfile
+                }
+            }
+        } else {
+            _authState.value = AuthState.Idle
+        }
+    }
+
     fun login(email: String, password: String) {
         _authState.value = AuthState.Loading
         authRepository.loginWithEmail(email, password) {
@@ -59,6 +75,11 @@ class AuthViewModel(
             _authState.value = if (exists) AuthState.Authenticated
             else AuthState.NeedsProfile
         }
+    }
+
+    fun signOut() {
+        authRepository.signOut()
+        _authState.value = AuthState.Unauthenticated
     }
 
     fun completeProfile(

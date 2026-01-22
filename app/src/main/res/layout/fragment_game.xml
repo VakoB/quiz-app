@@ -14,7 +14,8 @@
         tools:text="question?"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="10dp"/>
 
  <!--   <TextView
         android:id="@+id/gameTimer"
@@ -64,7 +65,7 @@
         android:id="@+id/gameOption1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:padding="20dp"
         tools:text="option 1"
         android:textSize="24sp"
@@ -80,7 +81,7 @@
         android:id="@+id/gameOption2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:padding="20dp"
         tools:text="option 2"
         android:textSize="24sp"
@@ -95,7 +96,7 @@
         android:id="@+id/gameOption3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:padding="20dp"
         tools:text="option 3"
         android:textSize="24sp"
@@ -110,7 +111,7 @@
         android:id="@+id/gameOption4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:padding="20dp"
         tools:text="option 4"
         android:textSize="24sp"

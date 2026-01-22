@@ -2,38 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/memberNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingVertical="12dp"
-        android:text="John Doe"
+        tools:text="John Doe"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/memberRoleTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="owner"
+        tools:text="owner"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/memberNameTv"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp"/>
+        app:layout_constraintStart_toStartOf="@+id/memberNameTv"
+        app:layout_constraintTop_toBottomOf="@id/memberNameTv"
+        />
 
     <TextView
         android:id="@+id/membersScoreTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:layout_marginEnd="20dp"
+        tools:text="0"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/memberRoleTv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/memberRoleTv"
-        android:layout_marginEnd="20dp"/>
+        app:layout_constraintTop_toTopOf="@+id/memberNameTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

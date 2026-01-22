@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topContent"
@@ -18,23 +18,32 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_top_content_container"
             android:paddingHorizontal="24dp"
-            android:paddingTop="24dp"
+            android:paddingTop="64dp"
             android:paddingBottom="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <!-- Header Section -->
+            <ImageView
+                android:id="@+id/owlImage"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_default_profile"
+                app:layout_constraintBottom_toBottomOf="@+id/tvGreeting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvGreeting" />
+
             <TextView
                 android:id="@+id/tvGreeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hi Gilbert"
+                android:text="Welcome back!"
                 android:textColor="@android:color/white"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/owlImage"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp"/>
 
             <ImageView
                 android:id="@+id/ivProfile"
@@ -44,16 +53,16 @@
                 android:background="@drawable/circle_background"
                 android:contentDescription="Profile"
                 android:padding="10dp"
-                android:src="@drawable/ic_default_profile"
+                android:src="@drawable/ic_profile"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="#6F6F6F"/>
 
-            <!-- Stats Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/statsCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="48dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +76,6 @@
                     android:orientation="horizontal"
                     android:paddingVertical="10dp">
 
-                    <!-- Ranking Section -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -100,14 +108,12 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- Divider -->
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginVertical="8dp"
                         android:background="#E5E5E5" />
 
-                    <!-- Points Section -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -145,53 +151,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Action Buttons -->
-        <LinearLayout
-            android:id="@+id/actionButtons"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="230dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCreateQuiz"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="#E74C5D"
-                android:text="Create Group"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_add"
-                app:iconGravity="textStart"
-                app:iconPadding="8dp"
-                app:iconTint="@android:color/white" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnJoinQuiz"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
-                android:text="Join Group"
-                app:icon="@drawable/ic_join_group"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:cornerRadius="16dp" />
-        </LinearLayout>
-
-        <!-- Category Title -->
         <TextView
             android:id="@+id/tvCategoryTitle"
             android:layout_marginTop="32dp"
@@ -202,9 +163,8 @@
             android:textColor="#B8B3C8"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actionButtons" />
+            app:layout_constraintTop_toBottomOf="@+id/topContent" />
 
-        <!-- Categories Grid -->
         <GridLayout
             android:id="@+id/categoriesGrid"
             android:layout_width="0dp"
@@ -216,7 +176,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCategoryTitle">
 
-            <!-- History Category -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="160dp"
@@ -259,7 +218,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Maths Category -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="160dp"
@@ -302,7 +260,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Sports Category -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="160dp"
@@ -345,7 +302,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Geography Category -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="160dp"

@@ -45,10 +45,10 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            navigateToHome()
-        }
+        //val user = FirebaseAuth.getInstance().currentUser
+        //if (user != null) {
+        //    navigateToHome()
+        //}
 
         credentialManager = CredentialManager.create(requireContext())
         btnGoogleLogin.setOnClickListener {
