@@ -1,18 +1,21 @@
 package com.example.quizapp.ui.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.quizapp.data.auth.AuthRepository
 import com.example.quizapp.data.auth.UserRepository
 import com.example.quizapp.data.models.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class AuthViewModel(
     private val authRepository: AuthRepository = AuthRepository(),
     private val userRepository: UserRepository = UserRepository()
 ) : ViewModel() {
-
+    private val _currentUser = MutableLiveData<User?>()
+    val currentUser: LiveData<User?> = _currentUser
     private val _authState = MutableLiveData<AuthState>(AuthState.Idle)
     val authState: LiveData<AuthState> = _authState
 
@@ -82,11 +85,24 @@ class AuthViewModel(
         _authState.value = AuthState.Unauthenticated
     }
 
-    fun completeProfile(
-        firstName: String,
-        lastName: String,
-        imageUrl: String = ""
-    ) {
+    fun loadCurrentUser() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid == null) {
+            _currentUser.value = null
+            return
+        }
+
+        userRepository.getUser(uid) { user ->
+            if (user != null) {
+                _currentUser.value = user
+            } else {
+                Log.d("AuthViewModel", "User not found in Firestore")
+                _currentUser.value = null
+            }
+        }
+    }
+
+    fun completeProfile(firstName: String, lastName: String) {
         val firebaseUser = authRepository.getCurrentUser() ?: run {
             _authState.value = AuthState.Error("User not logged in")
             return
@@ -97,14 +113,19 @@ class AuthViewModel(
             firstName = firstName,
             lastName = lastName,
             email = firebaseUser.email ?: "",
-            imageUrl = imageUrl,
+            imageUrl = firebaseUser.photoUrl?.toString() ?: "",
             provider = firebaseUser.providerData.firstOrNull()?.providerId ?: "google",
             completedProfile = true
         )
 
         userRepository.createUser(user) { success ->
-            _authState.value = if (success) AuthState.Authenticated
-            else AuthState.Error("Failed to save profile")
+            if (success) {
+                _currentUser.value = user
+                _authState.value = AuthState.Authenticated
+            } else {
+                _authState.value = AuthState.Error("Failed to save profile")
+            }
         }
     }
+
 }

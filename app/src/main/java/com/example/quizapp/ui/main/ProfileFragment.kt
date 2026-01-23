@@ -1,6 +1,7 @@
 package com.example.quizapp.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentProfileBinding
 import com.example.quizapp.ui.auth.AuthState
@@ -45,6 +47,23 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.loadCurrentUser()
+
+        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
+            user?.let {
+                tvName.text = "${it.firstName} ${it.lastName}"
+                val imageUri = if (it.imageUrl?.isNotEmpty() == true) it.imageUrl else null
+                if (imageUri == null) {
+                    Log.d("ProfileFragment", "Image URL is empty or null")
+                }
+                Glide.with(profileImageView)
+                    .load(imageUri)
+                    .placeholder(R.drawable.ic_profile)
+                    .circleCrop()
+                    .into(profileImageView)
+            }
+        }
     }
 
 
@@ -52,6 +71,7 @@ class ProfileFragment : Fragment() {
         val mainNavController = requireActivity().findNavController(R.id.nav_host)
         //val action = MainFragmentDirections.actionMainFragmentToGroupDetailsFragment(group.groupId)
         mainNavController.navigate(R.id.auth_nav_graph)
+
     }
 
     override fun onDestroyView() {

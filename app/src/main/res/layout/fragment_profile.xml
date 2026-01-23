@@ -16,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="100dp"
-        android:src="@drawable/ic_profile"
         android:background="@drawable/circle_background"
         android:backgroundTint="#8E8E8E"
 

@@ -1,11 +1,12 @@
 package com.example.quizapp.data.auth
 
 import com.example.quizapp.data.models.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class UserRepository(
-    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-) {
+class UserRepository() {
+    private val auth = FirebaseAuth.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
     private val usersCollection = firestore.collection("users")
 
     fun userExists(uid: String, callback: (Boolean) -> Unit) {
